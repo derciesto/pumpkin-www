@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "credit_requirement")
@@ -19,7 +21,7 @@ public class CreditRequirement {
     @JoinColumn(name = "company_id", nullable = false)
     private CompanyProfile company;
 
-    private String loadFormat;
+    private String loanFormat;
 
     @Column(columnDefinition = "TEXT")
     private String requirementDescription;
@@ -38,6 +40,8 @@ public class CreditRequirement {
     private LocalDate purchaseDate;
 
     private String ownedBy;
+    private String sourceChannel;
+    private String status;
 
     private Integer purchaseValue;
 
@@ -45,4 +49,8 @@ public class CreditRequirement {
 
     @Column(columnDefinition = "TEXT")
     private String description;
+
+    @OneToMany(mappedBy = "creditRequirement", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JsonBackReference
+    private List<Proposal> proposals = new ArrayList<>();
 }

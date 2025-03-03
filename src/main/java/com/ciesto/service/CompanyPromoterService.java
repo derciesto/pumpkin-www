@@ -1,5 +1,6 @@
 package com.ciesto.service;
 
+import com.ciesto.common.Constants;
 import com.ciesto.model.CompanyPromoter;
 import com.ciesto.repository.CompanyPromoterRepository;
 import jakarta.persistence.EntityManager;
@@ -39,7 +40,7 @@ public class CompanyPromoterService {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<CompanyPromoter> query = cb.createQuery(CompanyPromoter.class);
         Root<CompanyPromoter> root = query.from(CompanyPromoter.class);
-        Join<Object, Object> companyJoin = root.join("company");
+        Join<Object, Object> companyJoin = root.join(Constants.COMPANY);
 
         List<Predicate> predicates = new ArrayList<>();
 
@@ -53,7 +54,7 @@ public class CompanyPromoterService {
             predicates.add(cb.equal(root.get("pan"), pan));
         }
         if (designation != null && !designation.isEmpty()) {
-            predicates.add(cb.like(cb.lower(root.get("designation")), "%" + designation.toLowerCase() + "%"));
+            predicates.add(cb.like(cb.lower(root.get("designation")), Constants.PERCENT_SYMBOL + designation.toLowerCase() + "%"));
         }
 
         query.select(root).where(predicates.toArray(new Predicate[0]));

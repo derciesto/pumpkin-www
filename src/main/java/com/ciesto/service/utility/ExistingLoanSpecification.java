@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.ciesto.common.Constants.*;
+
 public class ExistingLoanSpecification {
     public static Specification<ExistingLoan> filterLoans(
             String lendingInstitute, String loanType,
@@ -17,19 +19,19 @@ public class ExistingLoanSpecification {
             List<Predicate> predicates = new ArrayList<>();
 
             if (lendingInstitute != null && !lendingInstitute.isEmpty()) {
-                predicates.add(criteriaBuilder.equal(root.get("lendingInstitute"), lendingInstitute));
+                predicates.add(criteriaBuilder.equal(root.get(LENDING_INSTITUTION), lendingInstitute));
             }
             if (loanType != null && !loanType.isEmpty()) {
-                predicates.add(criteriaBuilder.equal(root.get("loanType"), loanType));
+                predicates.add(criteriaBuilder.equal(root.get(LOAN_TYPE), loanType));
             }
             if (startDate != null) {
-                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("startDate"), startDate));
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get(START_DATE), startDate));
             }
             if (endDate != null) {
-                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("endDate"), endDate));
+                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get(END_DATE), endDate));
             }
             if (source != null && !source.isEmpty()) {
-                predicates.add(criteriaBuilder.equal(root.get("source"), source));
+                predicates.add(criteriaBuilder.equal(root.get(SOURCE), source));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

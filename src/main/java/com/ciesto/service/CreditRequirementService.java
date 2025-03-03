@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.ciesto.common.Constants.*;
+
+
 @Service
 public class CreditRequirementService {
 
@@ -94,24 +97,24 @@ public class CreditRequirementService {
         CriteriaQuery<CreditRequirement> query = cb.createQuery(CreditRequirement.class);
         Root<CreditRequirement> creditRoot = query.from(CreditRequirement.class);
 
-        Join<CreditRequirement, CompanyProfile> companyJoin = creditRoot.join("company");
+        Join<CreditRequirement, CompanyProfile> companyJoin = creditRoot.join(COMPANY);
 
         List<Predicate> predicates = new ArrayList<>();
 
         if (companyName != null && !companyName.isEmpty()) {
-            predicates.add(cb.like(cb.lower(companyJoin.get("name")), "%" + companyName.toLowerCase() + "%"));
+            predicates.add(cb.like(cb.lower(companyJoin.get(NAME)), PERCENT_SYMBOL + companyName.toLowerCase() + PERCENT_SYMBOL));
         }
         if (purpose != null && !purpose.isEmpty()) {
-            predicates.add(cb.like(cb.lower(creditRoot.get("requirementDescription")), "%" + purpose.toLowerCase() + "%"));
+            predicates.add(cb.like(cb.lower(creditRoot.get(REQUIREMENT_DESCRIPTION)), PERCENT_SYMBOL + purpose.toLowerCase() + PERCENT_SYMBOL));
         }
         if (status != null && !status.isEmpty()) {
-            predicates.add(cb.like(cb.lower(creditRoot.get("status")), "%" + status.toLowerCase() + "%"));
+            predicates.add(cb.like(cb.lower(creditRoot.get(STATUS)), PERCENT_SYMBOL + status.toLowerCase() + PERCENT_SYMBOL));
         }
         if (identifiedOn != null && !identifiedOn.isEmpty()) {
-            predicates.add(cb.like(cb.lower(creditRoot.get("dateOfFundRequirement").as(String.class)), "%" + identifiedOn + "%"));
+            predicates.add(cb.like(cb.lower(creditRoot.get(DATE_OF_FUND_REQUIREMENT).as(String.class)), PERCENT_SYMBOL + identifiedOn + PERCENT_SYMBOL));
         }
         if (sourceChannel != null && !sourceChannel.isEmpty()) {
-            predicates.add(cb.like(cb.lower(creditRoot.get("sourceChannel")), "%" + sourceChannel.toLowerCase() + "%"));
+            predicates.add(cb.like(cb.lower(creditRoot.get(SOURCE_CHANNEL)), PERCENT_SYMBOL + sourceChannel.toLowerCase() + PERCENT_SYMBOL));
         }
 
         query.select(creditRoot).where(predicates.toArray(new Predicate[0]));

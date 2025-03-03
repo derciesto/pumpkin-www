@@ -159,6 +159,8 @@ CREATE TABLE existing_loans (
 );
 
 
+ALTER TABLE proposals ADD COLUMN credit_requirement_id BIGINT;
+ALTER TABLE proposals ADD CONSTRAINT fk_proposal_credit_requirement FOREIGN KEY (credit_requirement_id) REFERENCES credit_requirement(id);
 
 
 
