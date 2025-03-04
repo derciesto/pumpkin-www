@@ -6,6 +6,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -27,7 +28,7 @@ public class CompanyProfile {
     private String industry;
     private String sector;
     private String msmeRegistrationNumber;
-    private String incorporationDate;
+    private Date incorporationDate;
     private String address;
     private String city;
     private String state;

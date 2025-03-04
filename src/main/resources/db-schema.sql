@@ -159,11 +159,21 @@ CREATE TABLE existing_loans (
 );
 
 
+
+ALTER TABLE public.credit_requirement ADD source_channel varchar(16) NULL;
+ALTER TABLE public.credit_requirement ADD status varchar(16) NULL;
+
+
 ALTER TABLE proposals ADD COLUMN credit_requirement_id BIGINT;
 ALTER TABLE proposals ADD CONSTRAINT fk_proposal_credit_requirement FOREIGN KEY (credit_requirement_id) REFERENCES credit_requirement(id);
 
 
 
+
+ALTER TABLE public.credit_requirement ADD source_channel varchar(16) NULL;
+ALTER TABLE public.credit_requirement ADD status varchar(16) NULL;
+
+ALTER TABLE public.credit_requirement RENAME COLUMN loa_format TO loan_format;
 
 
 
