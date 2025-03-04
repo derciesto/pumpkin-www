@@ -18,10 +18,12 @@ public class CreditApplicationController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody CreditApplication creditApplication) {
+    public ResponseEntity<?> create( @RequestParam Long companyId,
+                                     @RequestBody CreditApplication creditApplication) {
 
         try {
-            return ResponseEntity.ok(service.create(creditApplication));
+            CreditApplication savedCreditApplication = service.createCreditApplication(companyId, creditApplication);
+            return ResponseEntity.ok(savedCreditApplication);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

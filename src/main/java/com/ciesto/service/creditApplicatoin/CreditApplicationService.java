@@ -4,10 +4,11 @@ package com.ciesto.service.creditApplicatoin;
 import com.ciesto.common.Constants;
 import com.ciesto.common.customException.ImproperDataException;
 import com.ciesto.common.customException.ResourceNotFoundException;
+import com.ciesto.model.CompanyProfile;
 import com.ciesto.model.CreditApplication;
+import com.ciesto.repository.CompanyProfileRepository;
 import com.ciesto.repository.CreditApplicationRepository;
 import com.ciesto.service.creditApplicatoin.utility.CreditApplicationSpecification;
-import jakarta.transaction.Transactional;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
@@ -21,12 +22,19 @@ public class CreditApplicationService {
 
     private final CreditApplicationRepository repository;
 
-    public CreditApplicationService(CreditApplicationRepository repository) {
+    private final CompanyProfileRepository companyProfileRepository;
+
+    public CreditApplicationService(CreditApplicationRepository repository,CompanyProfileRepository companyProfileRepository) {
         this.repository = repository;
+        this.companyProfileRepository = companyProfileRepository;
     }
 
-    public CreditApplication create(CreditApplication creditApplication) {
+    public CreditApplication createCreditApplication(Long companyId, CreditApplication creditApplication) {
         try {
+            CompanyProfile company = companyProfileRepository.findById(companyId)
+                    .orElseThrow(() -> new ResourceNotFoundException("Company not found", 404L));
+
+            creditApplication.setCompany(company);
             return repository.save(creditApplication);
         } catch (DataIntegrityViolationException e) {
             throw new ImproperDataException("Provide proper data", Constants.DATA_NOT_FOUND, HttpStatus.BAD_REQUEST);

@@ -13,8 +13,6 @@ import java.util.List;
 @Entity
 @Table(name = "company_promoter")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString(exclude = {"socialReferences", "executiveAssociations"}) // Avoid recursion in logs
 public class CompanyPromoter {
 

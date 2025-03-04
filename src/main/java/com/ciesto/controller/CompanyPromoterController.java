@@ -1,10 +1,12 @@
 package com.ciesto.controller;
 
 import com.ciesto.model.CompanyPromoter;
+import com.ciesto.repository.CompanyProfileRepository;
 import com.ciesto.service.CompanyPromoterService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,9 @@ public class CompanyPromoterController {
 
     private static final Logger logger = LogManager.getLogger(CompanyPromoterController.class);
 
+
+    @Autowired
+    private CompanyProfileRepository companyProfileRepository;
 
     @Autowired
     private CompanyPromoterService promoterService;
@@ -41,4 +46,28 @@ public class CompanyPromoterController {
     public List<CompanyPromoter> getPromotersByCompanyId(@PathVariable Long companyId) {
         return promoterService.getPromotersByCompanyId(companyId);
     }
+
+    @PostMapping
+    public ResponseEntity<CompanyPromoter> createPromoter(
+            @RequestParam Long companyId,
+            @RequestBody CompanyPromoter promoter
+    ) {
+        return companyProfileRepository.findById(companyId).map(company -> {
+            promoter.setCompany(company);
+
+            // Link social references
+            if (promoter.getSocialReferences() != null) {
+                promoter.getSocialReferences().forEach(ref -> ref.setPromoter(promoter));
+            }
+
+            // Link executive associations
+            if (promoter.getExecutiveAssociations() != null) {
+                promoter.getExecutiveAssociations().forEach(assoc -> assoc.setPromoter(promoter));
+            }
+
+            CompanyPromoter savedPromoter = promoterService.save(promoter);
+            return new ResponseEntity<>(savedPromoter, HttpStatus.CREATED);
+        }).orElseGet(() -> ResponseEntity.badRequest().build());
+    }
+
 }

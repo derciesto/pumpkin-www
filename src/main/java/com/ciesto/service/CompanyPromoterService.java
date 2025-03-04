@@ -1,7 +1,10 @@
 package com.ciesto.service;
 
 import com.ciesto.common.Constants;
+import com.ciesto.common.customException.ResourceNotFoundException;
+import com.ciesto.model.CompanyProfile;
 import com.ciesto.model.CompanyPromoter;
+import com.ciesto.repository.CompanyProfileRepository;
 import com.ciesto.repository.CompanyPromoterRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -21,6 +24,9 @@ public class CompanyPromoterService {
 
     @Autowired
     private CompanyPromoterRepository promoterRepository;
+
+    @Autowired
+    private CompanyProfileRepository companyProfileRepository;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -65,8 +71,7 @@ public class CompanyPromoterService {
         return results;
     }
 
-    public CompanyPromoter savePromoter(CompanyPromoter promoter) {
-        logger.info("Saving promoter: {}", promoter);
+    public CompanyPromoter save(CompanyPromoter promoter) {
         return promoterRepository.save(promoter);
     }
 
