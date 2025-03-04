@@ -41,4 +41,3 @@ public class AssetLiabilitiesService {
         return repository.findAll(pageable);
     }
 }
-
