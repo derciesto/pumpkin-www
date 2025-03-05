@@ -2,8 +2,10 @@ package com.ciesto.service;
 
 import com.ciesto.model.CreditRequirement;
 import com.ciesto.model.CompanyProfile;
+import com.ciesto.model.RequirementApplicantDetails;
 import com.ciesto.repository.CompanyProfileRepository;
 import com.ciesto.repository.CreditRequirementRepository;
+import com.ciesto.repository.RequirementApplicantDetailsRepository;
 import jakarta.persistence.criteria.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -11,7 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +39,14 @@ public class CreditRequirementService {
 
     @Autowired
     private CompanyProfileRepository companyRepository;
+
+
+    @Autowired
+    private RequirementApplicantDetailsRepository repository;
+
+    @Autowired
+    private CreditRequirementRepository creditRequirementRepository;
+
 
 
     public List<CreditRequirement> getAllCreditRequirements() {
@@ -136,5 +150,66 @@ public class CreditRequirementService {
     public void deleteCreditRequirement(Long id) {
         logger.info("Deleting credit requirement with ID: {}", id);
         creditRepository.deleteById(id);
+    }
+
+
+    public RequirementApplicantDetails addRequirementApplicant(Long creditRequirementId, RequirementApplicantDetails applicant,
+                                                               MultipartFile panCard, MultipartFile aadharCard, MultipartFile msmeRegistration) {
+        CreditRequirement creditRequirement = creditRequirementRepository.findById(creditRequirementId)
+                .orElseThrow(() -> new RuntimeException("Credit Requirement not found"));
+
+        applicant.setCreditRequirement(creditRequirement);
+
+        // Store only the file path in DB
+//        applicant.setPanCard(saveFile(panCard));
+//        applicant.setAadharCard(saveFile(aadharCard));
+//        applicant.setMsmeRegistration(saveFile(msmeRegistration));
+
+        return repository.save(applicant);
+    }
+
+    private static final String UPLOAD_DIR = "/uploads/documents/";
+
+
+    private String saveFile(MultipartFile file) {
+        if (file == null || file.isEmpty()) return null;
+        try {
+            Path uploadPath = Paths.get(UPLOAD_DIR);
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
+
+            String filePath = UPLOAD_DIR + file.getOriginalFilename();
+            Files.write(Paths.get(filePath), file.getBytes());
+            return filePath;
+        } catch (Exception e) {
+            throw new RuntimeException("File upload failed", e);
+        }
+    }
+
+    public List<RequirementApplicantDetails> getApplicantsByCreditRequirement(Long creditRequirementId) {
+        return repository.findByCreditRequirement_Id(creditRequirementId);
+    }
+
+    public RequirementApplicantDetails getApplicantById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Applicant not found"));
+    }
+
+    public RequirementApplicantDetails updateApplicant(Long id, RequirementApplicantDetails updatedApplicant) {
+        return repository.findById(id).map(existing -> {
+            existing.setFullName(updatedApplicant.getFullName());
+            existing.setEmail(updatedApplicant.getEmail());
+            existing.setPhone(updatedApplicant.getPhone());
+            existing.setEmploymentType(updatedApplicant.getEmploymentType());
+            existing.setIncomePerAnnum(updatedApplicant.getIncomePerAnnum());
+            existing.setState(updatedApplicant.getState());
+//            existing.setPanDocument(updatedApplicant.getPanDocument());
+            return repository.save(existing);
+        }).orElseThrow(() -> new RuntimeException("Applicant not found"));
+    }
+
+    public void deleteApplicant(Long id) {
+        repository.deleteById(id);
     }
 }
