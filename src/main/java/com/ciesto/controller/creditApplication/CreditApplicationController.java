@@ -1,14 +1,15 @@
 package com.ciesto.controller.creditApplication;
 
-import com.ciesto.model.CreditApplication;
-import com.ciesto.service.creditApplicatoin.CreditApplicationService;
+import com.ciesto.dto.ApiResponse;
+import com.ciesto.model.creditApplication.CreditApplication;
+import com.ciesto.service.creditApplication.CreditApplicationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/credit-applications")
+@RequestMapping("/api/credit-applications")
 public class CreditApplicationController {
 
     private final CreditApplicationService service;
@@ -18,30 +19,40 @@ public class CreditApplicationController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create( @RequestParam Long companyId,
-                                     @RequestBody CreditApplication creditApplication) {
-
+    public ResponseEntity<ApiResponse<CreditApplication>> create(
+            @RequestParam Long companyId,
+            @RequestBody CreditApplication creditApplication) {
         try {
             CreditApplication savedCreditApplication = service.createCreditApplication(companyId, creditApplication);
-            return ResponseEntity.ok(savedCreditApplication);
+            return ResponseEntity.ok(ApiResponse.success(savedCreditApplication));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(ApiResponse.error("Error creating credit application: " + e.getMessage()));
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CreditApplication> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(service.getById(id));
+    public ResponseEntity<ApiResponse<CreditApplication>> getById(@PathVariable Long id) {
+        try {
+            CreditApplication creditApplication = service.getById(id);
+            return ResponseEntity.ok(ApiResponse.success(creditApplication));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ApiResponse.error("Error fetching credit application: " + e.getMessage()));
+        }
     }
 
     @GetMapping
-    public ResponseEntity<List<CreditApplication>> getAllFiltered(
+    public ResponseEntity<ApiResponse<List<CreditApplication>>> getAllFiltered(
             @RequestParam(required = false) String companyName,
             @RequestParam(required = false) String purpose,
             @RequestParam(required = false) String identifiedOn,
             @RequestParam(required = false) String sourceChannel,
             @RequestParam(required = false) String status
     ) {
-        return ResponseEntity.ok(service.getAllFiltered(companyName, purpose, identifiedOn, sourceChannel, status));
+        try {
+            List<CreditApplication> applications = service.getAllFiltered(companyName, purpose, identifiedOn, sourceChannel, status);
+            return ResponseEntity.ok(ApiResponse.success(applications));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(ApiResponse.error("Error fetching credit applications: " + e.getMessage()));
+        }
     }
 }

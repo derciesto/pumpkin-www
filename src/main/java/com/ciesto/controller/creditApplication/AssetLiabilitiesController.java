@@ -1,7 +1,8 @@
 package com.ciesto.controller.creditApplication;
 
-import com.ciesto.model.AssetLiabilities;
-import com.ciesto.service.creditApplicatoin.AssetLiabilitiesService;
+import com.ciesto.dto.ApiResponse;
+import com.ciesto.model.creditApplication.AssetLiabilities;
+import com.ciesto.service.creditApplication.AssetLiabilitiesService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -17,23 +18,42 @@ public class AssetLiabilitiesController {
     }
 
     @PostMapping
-    public ResponseEntity<AssetLiabilities> create(@RequestParam Long creditApplicationId,@RequestBody AssetLiabilities entity) {
-        return ResponseEntity.ok(service.save(creditApplicationId,entity));
+    public ResponseEntity<ApiResponse<AssetLiabilities>> create(@RequestParam Long creditApplicationId, @RequestBody AssetLiabilities entity) {
+        try {
+            AssetLiabilities savedEntity = service.save(creditApplicationId, entity);
+            return ResponseEntity.ok(ApiResponse.success(savedEntity));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ApiResponse.error("Error creating asset liability: " + e.getMessage()));
+        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AssetLiabilities> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(service.getById(id));
+    public ResponseEntity<ApiResponse<AssetLiabilities>> getById(@PathVariable Long id) {
+        try {
+            AssetLiabilities entity = service.getById(id);
+            return ResponseEntity.ok(ApiResponse.success(entity));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ApiResponse.error("Error fetching asset liability: " + e.getMessage()));
+        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        service.delete(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<ApiResponse<Void>> delete(@PathVariable Long id) {
+        try {
+            service.delete(id);
+            return ResponseEntity.ok(ApiResponse.success(null));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ApiResponse.error("Error deleting asset liability: " + e.getMessage()));
+        }
     }
 
     @GetMapping
-    public ResponseEntity<Page<AssetLiabilities>> getAll(Pageable pageable) {
-        return ResponseEntity.ok(service.getAll(pageable));
+    public ResponseEntity<ApiResponse<Page<AssetLiabilities>>> getAll(Pageable pageable) {
+        try {
+            Page<AssetLiabilities> page = service.getAll(pageable);
+            return ResponseEntity.ok(ApiResponse.success(page));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(ApiResponse.error("Error fetching asset liabilities: " + e.getMessage()));
+        }
     }
 }

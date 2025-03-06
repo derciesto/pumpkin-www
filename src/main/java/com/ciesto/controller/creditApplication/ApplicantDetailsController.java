@@ -1,7 +1,8 @@
 package com.ciesto.controller.creditApplication;
 
-import com.ciesto.model.ApplicantDetails;
-import com.ciesto.service.creditApplicatoin.ApplicantDetailsService;
+import com.ciesto.dto.ApiResponse;
+import com.ciesto.model.creditApplication.ApplicantDetails;
+import com.ciesto.service.creditApplication.ApplicantDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -16,42 +17,61 @@ public class ApplicantDetailsController {
     @Autowired
     private ApplicantDetailsService service;
 
-    // Create a new applicant
     @PostMapping
-    public ResponseEntity<ApplicantDetails> createApplicant(
+    public ResponseEntity<ApiResponse<ApplicantDetails>> createApplicant(
             @RequestParam Long creditApplicationId,
             @Validated @RequestBody ApplicantDetails applicant) {
-        return ResponseEntity.ok(service.createApplicant(creditApplicationId, applicant));
+        try {
+            ApplicantDetails createdApplicant = service.createApplicant(creditApplicationId, applicant);
+            return ResponseEntity.ok(ApiResponse.success(createdApplicant));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ApiResponse.error("Error creating applicant: " + e.getMessage()));
+        }
     }
 
-    // Get applicant by ID
     @GetMapping("/{id}")
-    public ResponseEntity<ApplicantDetails> getApplicantById(@PathVariable Long id) {
-        return ResponseEntity.ok(service.getApplicantById(id));
+    public ResponseEntity<ApiResponse<ApplicantDetails>> getApplicantById(@PathVariable Long id) {
+        try {
+            ApplicantDetails applicant = service.getApplicantById(id);
+            return ResponseEntity.ok(ApiResponse.success(applicant));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(ApiResponse.error("Error fetching applicant: " + e.getMessage()));
+        }
     }
 
-    // Get all applicants with filtering
     @GetMapping
-    public ResponseEntity<List<ApplicantDetails>> getAllApplicants(
+    public ResponseEntity<ApiResponse<List<ApplicantDetails>>> getAllApplicants(
             @RequestParam(required = false) String pan,
             @RequestParam(required = false) String phone,
             @RequestParam(required = false) String employmentType,
             @RequestParam(required = false) String state) {
-        return ResponseEntity.ok(service.getApplicantsWithFilters(pan, phone, employmentType, state));
+        try {
+            List<ApplicantDetails> applicants = service.getApplicantsWithFilters(pan, phone, employmentType, state);
+            return ResponseEntity.ok(ApiResponse.success(applicants));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(ApiResponse.error("Error fetching applicants: " + e.getMessage()));
+        }
     }
 
-    // Update an applicant
     @PutMapping("/{id}")
-    public ResponseEntity<ApplicantDetails> updateApplicant(
+    public ResponseEntity<ApiResponse<ApplicantDetails>> updateApplicant(
             @PathVariable Long id,
             @Validated @RequestBody ApplicantDetails applicantDetails) {
-        return ResponseEntity.ok(service.updateApplicant(id, applicantDetails));
+        try {
+            ApplicantDetails updatedApplicant = service.updateApplicant(id, applicantDetails);
+            return ResponseEntity.ok(ApiResponse.success(updatedApplicant));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ApiResponse.error("Error updating applicant: " + e.getMessage()));
+        }
     }
 
-    // Delete an applicant
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteApplicant(@PathVariable Long id) {
-        service.deleteApplicant(id);
-        return ResponseEntity.ok("Applicant deleted successfully.");
+    public ResponseEntity<ApiResponse<String>> deleteApplicant(@PathVariable Long id) {
+        try {
+            service.deleteApplicant(id);
+            return ResponseEntity.ok(ApiResponse.success("Applicant deleted successfully."));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(ApiResponse.error("Error deleting applicant: " + e.getMessage()));
+        }
     }
 }

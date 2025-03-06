@@ -1,11 +1,11 @@
 package com.ciesto.controller.creditApplication;
 
-import com.ciesto.model.Proposal;
-import com.ciesto.service.ProposalService;
+import com.ciesto.dto.ApiResponse;
+import com.ciesto.model.creditRequirement.Proposal;
+import com.ciesto.service.creditRequest.ProposalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +24,7 @@ public class ProposalController {
     }
 
     @GetMapping("/filter")
-    public List<Proposal> getFilteredProposals(
+    public ResponseEntity<ApiResponse<List<Proposal>>> getFilteredProposals(
             @RequestParam(required = false) String lendingInstitution,
             @RequestParam(required = false) Integer loanDuration,
             @RequestParam(required = false) Long loanAmount,
@@ -36,27 +36,45 @@ public class ProposalController {
         logger.info("Received filters: lendingInstitution={}, loanDuration={}, loanAmount={}, interestRate={}, sourceChannel={}, proposalDate={}, status={}",
                 lendingInstitution, loanDuration, loanAmount, interestRate, sourceChannel, proposalDate, status);
 
-        List<Proposal> proposals = proposalService.getFilteredProposals(lendingInstitution, loanDuration, loanAmount, interestRate, sourceChannel, proposalDate, status);
-
-        logger.info("Returning {} proposals", proposals.size());
-        return proposals;
+        try {
+            List<Proposal> proposals = proposalService.getFilteredProposals(lendingInstitution, loanDuration, loanAmount, interestRate, sourceChannel, proposalDate, status);
+            return ResponseEntity.ok(ApiResponse.success(proposals));
+        } catch (Exception e) {
+            logger.error("Error fetching filtered proposals: {}", e.getMessage());
+            return ResponseEntity.internalServerError().body(ApiResponse.error("Error fetching filtered proposals: " + e.getMessage()));
+        }
     }
 
     @PostMapping("/{creditRequirementId}")
-    public ResponseEntity<Proposal> addProposal(@PathVariable Long creditRequirementId, @RequestBody Proposal proposal) {
-        Proposal savedProposal = proposalService.saveProposal(creditRequirementId, proposal);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedProposal);
+    public ResponseEntity<ApiResponse<Proposal>> addProposal(@PathVariable Long creditRequirementId, @RequestBody Proposal proposal) {
+        try {
+            Proposal savedProposal = proposalService.saveProposal(creditRequirementId, proposal);
+            return ResponseEntity.ok(ApiResponse.success(savedProposal));
+        } catch (Exception e) {
+            logger.error("Error adding proposal: {}", e.getMessage());
+            return ResponseEntity.badRequest().body(ApiResponse.error("Error adding proposal: " + e.getMessage()));
+        }
     }
 
     @GetMapping("/creditRequirement/{creditRequirementId}")
-    public ResponseEntity<List<Proposal>> getProposalsByCreditRequirement(@PathVariable Long creditRequirementId) {
-        List<Proposal> proposals = proposalService.getProposalsByCreditRequirement(creditRequirementId);
-        return ResponseEntity.ok(proposals);
+    public ResponseEntity<ApiResponse<List<Proposal>>> getProposalsByCreditRequirement(@PathVariable Long creditRequirementId) {
+        try {
+            List<Proposal> proposals = proposalService.getProposalsByCreditRequirement(creditRequirementId);
+            return ResponseEntity.ok(ApiResponse.success(proposals));
+        } catch (Exception e) {
+            logger.error("Error fetching proposals by credit requirement: {}", e.getMessage());
+            return ResponseEntity.internalServerError().body(ApiResponse.error("Error fetching proposals: " + e.getMessage()));
+        }
     }
 
     @GetMapping("/fetch/{id}")
-    public ResponseEntity<Proposal> getProposalById(@PathVariable Long id) {
-        Proposal proposal = proposalService.getProposal(id);
-        return ResponseEntity.ok(proposal);
+    public ResponseEntity<ApiResponse<Proposal>> getProposalById(@PathVariable Long id) {
+        try {
+            Proposal proposal = proposalService.getProposal(id);
+            return ResponseEntity.ok(ApiResponse.success(proposal));
+        } catch (Exception e) {
+            logger.error("Error fetching proposal by ID: {}", e.getMessage());
+            return ResponseEntity.badRequest().body(ApiResponse.error("Error fetching proposal: " + e.getMessage()));
+        }
     }
 }

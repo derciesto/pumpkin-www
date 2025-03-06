@@ -1,6 +1,6 @@
 package com.ciesto.service.utility;
 
-import com.ciesto.model.Proposal;
+import com.ciesto.model.creditRequirement.Proposal;
 import org.springframework.data.jpa.domain.Specification;
 import jakarta.persistence.criteria.Predicate;
 
