@@ -19,7 +19,7 @@ public class CompanyPromoter {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "company_id", nullable = false)
+    @JoinColumn(name = "company_id")
     @JsonBackReference
     private CompanyProfile company;
 

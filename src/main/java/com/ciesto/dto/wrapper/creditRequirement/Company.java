@@ -36,7 +36,7 @@ public class Company {
     private String city;
     @JsonProperty("state")
     private String state;
-    @JsonProperty("state")
+    @JsonProperty("zip")
     private String zip;
     @JsonProperty("country")
     private String country;

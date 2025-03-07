@@ -91,11 +91,6 @@ public class LoanRequest {
 //    private String chequeDoc;
 //
 
-
-
-
-
-
     @JsonProperty("address")
     private List<Address> address;
 

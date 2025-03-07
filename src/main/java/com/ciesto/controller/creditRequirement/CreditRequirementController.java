@@ -8,6 +8,7 @@ import com.ciesto.service.creditRequest.CreateCreditRequirementService;
 import com.ciesto.service.creditRequest.CreditRequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -111,7 +112,7 @@ public class CreditRequirementController {
         }
     }
 
-    @PostMapping("/apply")
+    @PostMapping(value = "/apply", consumes = MediaType.APPLICATION_JSON_VALUE)
     public String applyForLoan(@RequestBody LoanRequest loanRequest) {
         createCreditRequirementService.createRequirement(loanRequest);
         return "Loan application received for " + loanRequest.getLoanAmount();
