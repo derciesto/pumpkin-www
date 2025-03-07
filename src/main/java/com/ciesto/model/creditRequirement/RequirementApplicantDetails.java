@@ -1,7 +1,5 @@
 package com.ciesto.model.creditRequirement;
 
-import com.ciesto.model.creditRequirement.ApplicantLocation;
-import com.ciesto.model.creditRequirement.CreditRequirement;
 import jakarta.persistence.*;
 import lombok.Data;
 

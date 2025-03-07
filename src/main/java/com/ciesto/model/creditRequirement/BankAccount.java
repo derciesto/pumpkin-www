@@ -12,7 +12,7 @@ public class BankAccount {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "credit_context_id", nullable = false)
+    @JoinColumn(name = "credit_context_id")
     private RequirementCreditContext creditContext;
 
     private String accountNumber;

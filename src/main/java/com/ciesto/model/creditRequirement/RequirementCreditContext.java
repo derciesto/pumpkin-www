@@ -1,7 +1,5 @@
 package com.ciesto.model.creditRequirement;
 
-import com.ciesto.model.creditRequirement.BankAccount;
-import com.ciesto.model.creditRequirement.CreditRequirement;
 import com.ciesto.model.senctioned.IncomeRevenueDetails;
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,14 +21,14 @@ public class RequirementCreditContext {
     private Long totalLoanAmount;
     private Long totalMonthlyEmi;
 
-    @OneToOne
-    @JoinColumn(name = "primary_bank_account_id")
-    private BankAccount primaryBankAccount;
+//    @OneToOne
+//    @JoinColumn(name = "primary_bank_account_id")
+//    private BankAccount primaryBankAccount;
 
     private String cancelledCheck;
     private String bankAccountStatement;
 
-    @OneToMany(mappedBy = "creditContext", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<IncomeRevenueDetails> incomeRevenueDetails;
+//    @OneToMany(mappedBy = "creditContext", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<IncomeRevenueDetails> incomeRevenueDetails;
 }
 

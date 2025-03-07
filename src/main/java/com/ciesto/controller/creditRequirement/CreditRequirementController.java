@@ -1,10 +1,13 @@
 package com.ciesto.controller.creditRequirement;
 
 import com.ciesto.dto.ApiResponse;
+import com.ciesto.dto.wrapper.creditRequirement.LoanRequest;
 import com.ciesto.model.creditRequirement.CreditRequirement;
 import com.ciesto.model.creditRequirement.RequirementApplicantDetails;
+import com.ciesto.service.creditRequest.CreateCreditRequirementService;
 import com.ciesto.service.creditRequest.CreditRequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +20,9 @@ public class CreditRequirementController {
 
     @Autowired
     private CreditRequirementService service;
+
+    @Autowired
+    private CreateCreditRequirementService createCreditRequirementService;
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<CreditRequirement>>> getAllCreditRequirements() {
@@ -103,5 +109,11 @@ public class CreditRequirementController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ApiResponse.error("Error deleting applicant: " + e.getMessage()));
         }
+    }
+
+    @PostMapping("/apply")
+    public String applyForLoan(@RequestBody LoanRequest loanRequest) {
+        createCreditRequirementService.createRequirement(loanRequest);
+        return "Loan application received for " + loanRequest.getLoanAmount();
     }
 }

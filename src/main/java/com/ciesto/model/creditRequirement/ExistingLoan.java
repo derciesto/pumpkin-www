@@ -1,6 +1,5 @@
 package com.ciesto.model.creditRequirement;
 
-import com.ciesto.model.creditRequirement.CompanyProfile;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
@@ -29,7 +28,7 @@ public class ExistingLoan {
     @Column(nullable = false)
     private Long loanAmount;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = false)
     private String loanType;
 
     @Column(nullable = false)
@@ -44,7 +43,7 @@ public class ExistingLoan {
     @Column(nullable = false)
     private Integer tenureMonths;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
     private String source;
 
     public Long getCompanyId() {

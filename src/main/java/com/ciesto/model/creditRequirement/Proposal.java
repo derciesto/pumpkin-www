@@ -1,6 +1,5 @@
 package com.ciesto.model.creditRequirement;
 
-import com.ciesto.model.creditRequirement.CreditRequirement;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;

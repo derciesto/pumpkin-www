@@ -20,7 +20,7 @@ public class CompanyPromoter {
 
     @ManyToOne
     @JoinColumn(name = "company_id", nullable = false)
-    @JsonBackReference // Prevents recursion
+    @JsonBackReference
     private CompanyProfile company;
 
     private String name;
@@ -36,10 +36,10 @@ public class CompanyPromoter {
     private String din;
 
     @OneToMany(mappedBy = "promoter", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonManagedReference // Prevent recursion
+    @JsonManagedReference
     private List<SocialReference> socialReferences;
 
     @OneToMany(mappedBy = "promoter", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonManagedReference // Prevent recursion
+    @JsonManagedReference
     private List<ExecutiveAssociation> executiveAssociations;
 }
