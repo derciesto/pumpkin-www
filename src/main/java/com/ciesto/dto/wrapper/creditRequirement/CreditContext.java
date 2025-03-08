@@ -19,6 +19,4 @@ public class CreditContext {
     @JsonProperty("bankAccountStatement")
     private String bankAccountStatement;
 
-    @JsonProperty("bank")
-    private List<Bank> bank;
 }

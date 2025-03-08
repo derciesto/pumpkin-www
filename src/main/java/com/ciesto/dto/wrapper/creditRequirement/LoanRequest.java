@@ -100,5 +100,8 @@ public class LoanRequest {
     @JsonProperty("company")
     private List<Company> company;
 
+    @JsonProperty("bank")
+    private List<Bank> bank;
+
 }
 

@@ -28,11 +28,11 @@ public class CreateCreditRequirementService {
     @Autowired
     private RequirementCreditContextRepository requirementCreditContextRepository;
 
-    public void createRequirement(LoanRequest loanRequest) {
+    public void createRequirement(LoanRequest loanRequest) throws Exception {
         mapLoanRequest(loanRequest);
     }
 
-    private void mapLoanRequest(LoanRequest loanRequest) {
+    private void mapLoanRequest(LoanRequest loanRequest) throws Exception {
         CreditRequirement requirement = new CreditRequirement();
         requirement.setLoanFormat(loanRequest.getLoanFormat());
         requirement.setRequirementDescription(loanRequest.getRequirementDescription());
@@ -52,13 +52,15 @@ public class CreateCreditRequirementService {
         requirement.setCompany(mapCompany(loanRequest.getCompany()));
         CreditRequirement saved = creditRequirementRepository.save(requirement);
 
-        mapCreditContext(loanRequest.getCreditContext(),saved);
-
-
+        try {
+            mapCreditContext(loanRequest.getCreditContext(), saved, loanRequest.getBank());
+        } catch (Exception e) {
+            throw new Exception("check loan requirement data : " + e.getMessage());
+        }
     }
 
 
-    private CompanyProfile mapCompany(List<Company> companies) {
+    private CompanyProfile mapCompany(List<Company> companies) throws Exception {
         CompanyProfile save = new CompanyProfile();
         for (Company company : companies) {
             CompanyProfile companyObj = new CompanyProfile();
@@ -79,18 +81,27 @@ public class CreateCreditRequirementService {
             companyObj.setCountry(company.getCountry());
             companyObj.setInsertedOrUpdatedDate(LocalDateTime.now());
 
-            companyObj.setPromoters(mapPromoters(company.getPromoters()));
+          try {
+            save = companyProfileRepository.save(companyObj);
+        } catch(Exception e) {
+            throw new Exception("check company data : " + e.getMessage());
+        }
+            try {
+                mapPromoters(company.getPromoters(), save);
+            } catch (Exception e) {
+                throw new Exception("check promoter data : " + e.getMessage());
+            }
 //            mapAddress(company.getAddresses());
 
-            save = companyProfileRepository.save(companyObj);
         }
         return save;
     }
 
-    private List<CompanyPromoter> mapPromoters(List<PromoterDTO> promoters) {
+    private List<CompanyPromoter> mapPromoters(List<PromoterDTO> promoters, CompanyProfile save) {
         List<CompanyPromoter> comProm = new ArrayList<>();
         for (PromoterDTO promoter : promoters) {
             CompanyPromoter prom = new CompanyPromoter();
+            prom.setCompany(save);
 
             prom.setName(promoter.getName());
             prom.setSurname(promoter.getSurname());
@@ -141,7 +152,7 @@ public class CreateCreditRequirementService {
 
     }
 
-    private void mapCreditContext(CreditContext creditContext,CreditRequirement requirement) {
+    private void mapCreditContext(CreditContext creditContext, CreditRequirement requirement, List<Bank> banks) throws Exception {
         RequirementCreditContext req = new RequirementCreditContext();
 
         req.setCreditScore(creditContext.getCreditScore());
@@ -151,11 +162,15 @@ public class CreateCreditRequirementService {
         req.setCreditRequirement(requirement);
 
         RequirementCreditContext persisted = requirementCreditContextRepository.save(req);
-        mapBank(creditContext.getBank(),persisted);
+        try {
+            mapBank(banks, persisted);
+        } catch (Exception e) {
+            throw new Exception("check bank data : " + e.getMessage());
+        }
 
     }
 
-    private List<BankAccount> mapBank(List<Bank> banks,RequirementCreditContext cont) {
+    private List<BankAccount> mapBank(List<Bank> banks, RequirementCreditContext cont) {
         List<BankAccount> bankAccounts = new ArrayList<>();
 
         banks.forEach(bank -> {

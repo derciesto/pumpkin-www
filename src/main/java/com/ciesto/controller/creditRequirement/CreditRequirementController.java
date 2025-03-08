@@ -112,9 +112,15 @@ public class CreditRequirementController {
         }
     }
 
-    @PostMapping(value = "/apply", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String applyForLoan(@RequestBody LoanRequest loanRequest) {
-        createCreditRequirementService.createRequirement(loanRequest);
-        return "Loan application received for " + loanRequest.getLoanAmount();
+    @PostMapping("/apply")
+    public ResponseEntity<ApiResponse<String>> applyForLoan(@RequestBody LoanRequest loanRequest) {
+        try {
+            createCreditRequirementService.createRequirement(loanRequest);
+            String message = "Loan application received successfully for amount: " + loanRequest.getLoanAmount();
+            return ResponseEntity.ok(ApiResponse.success(message));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ApiResponse.error("Error while applying for loan: " + e.getMessage()));
+        }
     }
+
 }
