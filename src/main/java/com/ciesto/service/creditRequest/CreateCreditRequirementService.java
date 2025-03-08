@@ -3,6 +3,7 @@ package com.ciesto.service.creditRequest;
 import com.ciesto.dto.wrapper.creditRequirement.*;
 import com.ciesto.model.creditRequirement.*;
 import com.ciesto.repository.creditRequirement.*;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +29,11 @@ public class CreateCreditRequirementService {
     @Autowired
     private RequirementCreditContextRepository requirementCreditContextRepository;
 
+    @Transactional
     public void createRequirement(LoanRequest loanRequest) throws Exception {
         mapLoanRequest(loanRequest);
     }
+
 
     private void mapLoanRequest(LoanRequest loanRequest) throws Exception {
         CreditRequirement requirement = new CreditRequirement();

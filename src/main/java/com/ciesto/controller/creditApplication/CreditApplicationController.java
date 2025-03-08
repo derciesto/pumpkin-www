@@ -1,8 +1,10 @@
 package com.ciesto.controller.creditApplication;
 
 import com.ciesto.dto.ApiResponse;
+import com.ciesto.dto.wrapper.creditApplication.LoanApplicationRequestDTO;
 import com.ciesto.model.creditApplication.CreditApplication;
 import com.ciesto.service.creditApplication.CreditApplicationService;
+import com.ciesto.service.creditApplication.LoanApplicationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,8 +16,12 @@ public class CreditApplicationController {
 
     private final CreditApplicationService service;
 
-    public CreditApplicationController(CreditApplicationService service) {
+    private final LoanApplicationService loanApplicationService;
+
+    public CreditApplicationController(CreditApplicationService service,
+                                       LoanApplicationService loanApplicationService) {
         this.service = service;
+        this.loanApplicationService = loanApplicationService;
     }
 
     @PostMapping
@@ -53,6 +59,16 @@ public class CreditApplicationController {
             return ResponseEntity.ok(ApiResponse.success(applications));
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(ApiResponse.error("Error fetching credit applications: " + e.getMessage()));
+        }
+    }
+
+    @PostMapping("/apply")
+    public ResponseEntity<ApiResponse<Long>> submitApplication(@RequestBody LoanApplicationRequestDTO request) {
+        try {
+            CreditApplication application = loanApplicationService.createApplication(request);
+            return ResponseEntity.ok(ApiResponse.success(application.getId()));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(ApiResponse.error("Error submitting credit application: " + e.getMessage()));
         }
     }
 }
