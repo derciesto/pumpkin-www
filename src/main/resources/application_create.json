@@ -1,0 +1,95 @@
+{
+  "companyProfile": {
+    "gstin": "29ABCDE1234F1A5",
+    "panNo": "ABCDE1211F",
+    "msmeRegistrationNumber": "MSME123456",
+    "gsttype": "Regular",
+    "incorporationDate": "2015-06-15",
+    "sector": "Corporate",
+    "industry": "Fintech",
+    "applicantType": "Private Limited",
+    "name": "TestComp1",
+    "registrationType": "testtype",
+    "address": "adfd aeebxvdfqe34d 34gd 24",
+    "city": "raj",
+    "state": "guj",
+    "zip": "235124",
+    "country": "india"
+  },
+  // "addresses": [
+  //     {
+  //         "address": "123, Main Street",
+  //         "city": "Beverly Hills",
+  //         "state": "California",
+  //         "zip": "90210",
+  //         "country": "USA"
+  //     },
+  //     {
+  //         "address": "456, Second Street",
+  //         "city": "Los Angeles",
+  //         "state": "California",
+  //         "zip": "90001",
+  //         "country": "USA"
+  //     }
+  // ],
+  "loanDetails": {
+    "endUseOfFund": "Business Expansion",
+    "dateOfFundRequirement": "2025-03-13",
+    "loanAmount": 5000000,
+    "loanDuration": 36,
+    "collateralType": "Equities & Mutual Funds",
+    "purchaseDate": "2020-01-01",
+    "ownedBy": "Self",
+    "purchaseValue": 3000000,
+    "marketValue": 3500000,
+    "description": "Loan for expanding the existing business"
+  },
+  "applicantDetails": {
+    "pan": "ABCDE1234F",
+    "fullName": "John Doe",
+    "emailId": "johndoe@gmail.com",
+    "phone": "1234567890",
+    "employmentType": "Self-Employed",
+    "incomePerAnnum": 1200000,
+    "state": "California",
+    "panDocument": "PanCardDocument.pdf"
+  },
+  "financialAssessment": {
+    "financialYear": "2024-2025",
+    "month": "January",
+    "reportedSales": 1000000,
+    "reportedPurchases": 800000,
+    "taxesPaid": 150000,
+    "source": "Business Records"
+  },
+  "accountAssessment": {
+    "financialYear": "2024-2025",
+    "reportedRevenue": 5000000,
+    "grossIncome": 4500000,
+    "netIncome": 4000000,
+    "taxableIncome": 3500000,
+    "taxablePaid": 300000,
+    "source": "Bank Statements"
+  },
+  "assetLiabilities": {
+    "promoterName": "John Doe",
+    "statutoryId": "AB1234567",
+    "taxId": "TX123456",
+    "dob": "1980-05-20",
+    "mobile": "1234567890",
+    "designation": "CEO",
+    "doj": "2015-06-15",
+    "source": "Company Records"
+  },
+  "collateralSecurity": {
+    "bankName": "HDFC Bank",
+    "accountHolder": "John Doe",
+    "account": "123456789012",
+    "ifsc": "HDFC0001234",
+    "accountType": "Current",
+    "currency": "INR",
+    "openingDate": "2010-12-07",
+    "source": "Bank Passbook"
+  },
+  "status": "PENDING"
+}

@@ -1,0 +1,1223 @@
+{
+	"info": {
+		"_postman_id": "33ca32fc-d111-4934-b345-ccb2ee12f387",
+		"name": "pumpkin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35972168"
+	},
+	"item": [
+		{
+			"name": "credit application",
+			"item": [
+				{
+					"name": "add credit application",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"purpose\": \"Business Expansion\",\r\n  \"leadtimeAtDiscovery\": \"30 Days\",\r\n  \"leadAge\": \"10 Days\",\r\n  \"identifiedOn\": \"2025-02-15\",\r\n  \"sourceChannel\": \"offline\",\r\n  \"status\": \"New\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/credit-applications?companyId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"credit-applications"
+							],
+							"query": [
+								{
+									"key": "companyId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "credit application filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/credit-applications?companyName=Test2Companyname",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"credit-applications"
+							],
+							"query": [
+								{
+									"key": "companyName",
+									"value": "Test2Companyname"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add asset-liabilities",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"promoterName\": \"Rahul Vermaa\",\r\n  \"statutoryId\": \"STAT12346\",\r\n  \"taxId\": \"TAX12346\",\r\n  \"dob\": \"1980-05-21\",\r\n  \"mobile\": \"9876543219\",\r\n  \"designation\": \"S Director\",\r\n  \"doj\": \"2015-06-01\",\r\n  \"source\": \"Company Records\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/asset-liabilities?creditApplicationId=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"asset-liabilities"
+							],
+							"query": [
+								{
+									"key": "creditApplicationId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get asset-liabilities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/asset-liabilities/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"asset-liabilities",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add collateral-security",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"bankName\": \"State Bank of India\",\r\n  \"accountHolder\": \"John Doe\",\r\n  \"account\": \"1234567890\",\r\n  \"ifsc\": \"SBIN0001234\",\r\n  \"accountType\": \"Savings\",\r\n  \"currency\": \"INR\",\r\n  \"openingDate\": \"2018-05-12\",\r\n  \"source\": \"Customer Submission\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/collateral-security?creditApplicationId=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"collateral-security"
+							],
+							"query": [
+								{
+									"key": "creditApplicationId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get collateral-security",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"creditApplicationId\": 1,\r\n  \"bankName\": \"State Bank of India\",\r\n  \"accountHolder\": \"John Doe\",\r\n  \"account\": \"1234567890\",\r\n  \"ifsc\": \"SBIN0001234\",\r\n  \"accountType\": \"Savings\",\r\n  \"currency\": \"INR\",\r\n  \"openingDate\": \"2018-05-12\",\r\n  \"source\": \"Customer Submission\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/collateral-security/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"collateral-security",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add account-assessments",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"financialYear\": \"2023-2024\",\r\n  \"reportedRevenue\": 5000000,\r\n  \"grossIncome\": 1200000,\r\n  \"netIncome\": 800000,\r\n  \"taxableIncome\": 600000,\r\n  \"taxablePaid\": 150,\r\n  \"source\": \"Internal Report\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/account-assessment?creditApplicationId=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"account-assessment"
+							],
+							"query": [
+								{
+									"key": "creditApplicationId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "filter account-assessments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/account-assessment?financialYear=2023-2024",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"account-assessment"
+							],
+							"query": [
+								{
+									"key": "financialYear",
+									"value": "2023-2024"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add financial-assessments",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"financialYear\": \"2023\",\r\n    \"month\": \"January\",\r\n    \"reportedSales\": 10000,\r\n    \"reportedPurchases\": 5000,\r\n    \"taxesPaid\": 1500,\r\n    \"source\": \"Bank111\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/financial-assessments?creditApplicationId=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"financial-assessments"
+							],
+							"query": [
+								{
+									"key": "creditApplicationId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "filter financial-assessments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/financial-assessments?financialYear=2023-2024&month=January",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"financial-assessments"
+							],
+							"query": [
+								{
+									"key": "financialYear",
+									"value": "2023-2024"
+								},
+								{
+									"key": "month",
+									"value": "January"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "senctioned loans",
+			"item": [
+				{
+					"name": "add disbursed details",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"requestedDate\": \"2025-02-20\",\r\n  \"requestAmount\": 100000,\r\n  \"dueDate\": \"2025-03-20\",\r\n  \"requestedBy\": \"Manager\",\r\n  \"designation\": \"Loan Officer\",\r\n  \"document\": \"loan_doc.pdf\",\r\n  \"status\": \"Requested\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/disbursement-details?loanId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"disbursement-details"
+							],
+							"query": [
+								{
+									"key": "loanId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get disbursed details by loan",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"requestedDate\": \"2025-02-20\",\r\n  \"requestAmount\": 100000,\r\n  \"dueDate\": \"2025-03-20\",\r\n  \"requestedBy\": \"Manager\",\r\n  \"designation\": \"Loan Officer\",\r\n  \"document\": \"loan_doc.pdf\",\r\n  \"status\": \"Requested\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/disbursement-details/by-loan/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"disbursement-details",
+								"by-loan",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add senctioned loan",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"sanctionedAmount\": 500000,\r\n  \"disbursedAmount\": 200000,\r\n  \"roi\": 7.5,\r\n  \"product\": \"Business Loan\",\r\n  \"tenure\": 36,\r\n  \"emi\": 15000,\r\n  \"overdueAmount\": 0,\r\n  \"status\": \"Active\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/sanctioned-loans?creditApplicationId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sanctioned-loans"
+							],
+							"query": [
+								{
+									"key": "creditApplicationId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "filter senctioned loan",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"sanctionedAmount\": 500000,\r\n  \"disbursedAmount\": 200000,\r\n  \"roi\": 7.5,\r\n  \"product\": \"Business Loan\",\r\n  \"tenure\": 36,\r\n  \"emi\": 15000,\r\n  \"overdueAmount\": 0,\r\n  \"status\": \"Active\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/sanctioned-loans?loanAmount=500000&status=Active",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sanctioned-loans"
+							],
+							"query": [
+								{
+									"key": "loanAmount",
+									"value": "500000"
+								},
+								{
+									"key": "status",
+									"value": "Active"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get senctioned loan",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"sanctionedAmount\": 500000,\r\n  \"disbursedAmount\": 200000,\r\n  \"roi\": 7.5,\r\n  \"product\": \"Business Loan\",\r\n  \"tenure\": 36,\r\n  \"emi\": 15000,\r\n  \"overdueAmount\": 0,\r\n  \"status\": \"Active\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/sanctioned-loans/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sanctioned-loans",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "filter Disbursement",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"sanctionedAmount\": 500000,\r\n  \"disbursedAmount\": 200000,\r\n  \"roi\": 7.5,\r\n  \"product\": \"Business Loan\",\r\n  \"tenure\": 36,\r\n  \"emi\": 15000,\r\n  \"overdueAmount\": 0,\r\n  \"status\": \"Active\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/disbursement-details?loanId=1&status=Requested",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"disbursement-details"
+							],
+							"query": [
+								{
+									"key": "loanId",
+									"value": "1"
+								},
+								{
+									"key": "status",
+									"value": "Requested"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "credit requirement",
+			"item": [
+				{
+					"name": "get credit requirements",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/credit-requirements",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"credit-requirements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "promoters list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/promoters/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"promoters",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add promoters list",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"John\",\r\n  \"surname\": \"Doe\",\r\n  \"dob\": \"1985-07-15\",\r\n  \"aadharNumber\": \"123456789012\",\r\n  \"designation\": \"Director\",\r\n  \"shareholding\": 25,\r\n  \"age\": 39,\r\n  \"pan\": \"ABCDE1234F\",\r\n  \"address\": \"123 Business Street, Mumbai\",\r\n  \"yearsInAddress\": 5,\r\n  \"din\": \"01234567\",\r\n  \"socialReferences\": [\r\n    {\r\n      \"socialNetworkName\": \"LinkedIn\",\r\n      \"url\": \"https://linkedin.com/in/johndoe\"\r\n    }\r\n  ],\r\n  \"executiveAssociations\": [\r\n    {\r\n      \"associationName\": \"XYZ Pvt Ltd\",\r\n      \"membershipNumber\": \"XYZ123\",\r\n      \"dateOfJoining\": \"2018-06-01\"\r\n    }\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/promoters?companyId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"promoters"
+							],
+							"query": [
+								{
+									"key": "companyId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "promoters by company id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/promoters/company/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"promoters",
+								"company",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "credit requirements Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"company\": {\r\n            \"name\": \"Test2Companyname\",\r\n            \"registrationType\": \"pvt reg type\",\r\n            \"gstin\": \"12948y8qrb121\",\r\n            \"panNo\": \"kjsd1123m\",\r\n            \"industry\": \"it test2\",\r\n            \"sector\": \"sector test\",\r\n            \"msmeRegistrationNumber\": \"swofiw23rn msme number2\",\r\n            \"incorporationDate\": null,\r\n            \"address\": \"address test2\",\r\n            \"city\": \"rajkot\",\r\n            \"state\": \"gujrat\",\r\n            \"zip\": \"36006\",\r\n            \"country\": \"india\",\r\n            \"insertedOrUpdatedDate\": \"2025-02-25T20:47:01.114356\"\r\n        },\r\n        \"loanFormat\": \"BUSINESSFORMATE\",\r\n        \"requirementDescription\": \"need to test requirement description\",\r\n        \"endUseOfFund\": \"en use of fund\",\r\n        \"dateOfFundRequirement\": null,\r\n        \"loanAmount\": 101,\r\n        \"loanDuration\": 2153,\r\n        \"collateralType\": \"collatra type test1\",\r\n        \"purchaseDate\": null,\r\n        \"ownedBy\": \"own self test\",\r\n        \"purchaseValue\": 198,\r\n        \"marketValue\": 132,\r\n        \"description\": \"no description test1111\",\r\n        \"sourceChannel\": \"SDC/Zara\",\r\n        \"status\": \"New\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/credit-requirements/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"credit-requirements",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add existing loan",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lendingInstitute\": \"HDFC Bank\",\r\n    \"loanAmount\": 5000000,\r\n    \"loanType\": \"Business Loan\",\r\n    \"startDate\": \"2022-01-01\",\r\n    \"endDate\": \"2027-01-01\",\r\n    \"emi\": 50000,\r\n    \"tenureMonths\": 60,\r\n    \"source\": \"Bank Branch\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/loans/add/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"loans",
+								"add",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "existing loan filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/loans/filter?lendingInstitute=HDFC Bank&loanType=Business Loan&startDate=2022-01-01&endDate=2027-01-01&source=Bank Branch",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"loans",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "lendingInstitute",
+									"value": "HDFC Bank"
+								},
+								{
+									"key": "loanType",
+									"value": "Business Loan"
+								},
+								{
+									"key": "startDate",
+									"value": "2022-01-01"
+								},
+								{
+									"key": "endDate",
+									"value": "2027-01-01"
+								},
+								{
+									"key": "source",
+									"value": "Bank Branch"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "filter proposal",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/proposals/filter?lendingInstitution=HDF&loanAmount=500000&status=Pending",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"proposals",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "lendingInstitution",
+									"value": "HDF"
+								},
+								{
+									"key": "loanAmount",
+									"value": "500000"
+								},
+								{
+									"key": "status",
+									"value": "Pending"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "proposal by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/proposals/fetch/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"proposals",
+								"fetch",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add proposal",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"lendingInstitution\": \"HDFC Bank\",\r\n        \"loanDuration\": 60,\r\n        \"loanAmount\": 500000,\r\n        \"interestRate\": 7.50,\r\n        \"sourceChannel\": \"Website\",\r\n        \"proposalDate\": \"2025-02-26\",\r\n        \"status\": \"Pending\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/proposals/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"proposals",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get credit requirements Filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/credit-requirements/filter?status=PROGRESS",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"credit-requirements",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "PROGRESS"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "proposal by credit requirement id Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/proposals/creditRequirement/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"proposals",
+								"creditRequirement",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add applicant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fullName\": \"John Doe\",\r\n  \"gstin\": \"22AAAAA0000A1Z5\",\r\n  \"dob\": \"1990-05-20\",\r\n  \"applicantType\": \"Individual\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/credit-requirements/applicants?creditRequirementId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"credit-requirements",
+								"applicants"
+							],
+							"query": [
+								{
+									"key": "creditRequirementId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add credit context",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"creditScore\": 750,\r\n    \"totalLoanAmount\": 500000,\r\n    \"totalMonthlyEmi\": 15000\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/credit-context?creditRequirementId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"credit-context"
+							],
+							"query": [
+								{
+									"key": "creditRequirementId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get credit context",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/credit-context/by-credit-requirement/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"credit-context",
+								"by-credit-requirement",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add income revenue",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"financialYear\": 2024,\r\n  \"revenueAmount\": 5000000,\r\n  \"creditContext\": {\r\n    \"id\":3\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/income-revenue-details",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"income-revenue-details"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add bank account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountNumber\": \"123456789012\",\r\n    \"bankName\": \"State Bank of India\",\r\n    \"ifscCode\": \"SBIN0001234\",\r\n    \"accountHolderName\": \"John Doe\",\r\n    \"accountType\": \"Savings\",\r\n    \"creditContext\": {\r\n        \"id\": 1\r\n    }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/bank-accounts?creditContextId=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"bank-accounts"
+							],
+							"query": [
+								{
+									"key": "creditContextId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "senctioned loan",
+			"item": [
+				{
+					"name": "add statement",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"dateAvailable\": \"2025-03-04\",\r\n  \"document\": \"loan_statement.pdf\",\r\n  \"description\": \"Loan statement for the approved credit\",\r\n  \"owner\": \"John Doe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/statements?sanctionedLoanId=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"statements"
+							],
+							"query": [
+								{
+									"key": "sanctionedLoanId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add payment method",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"accountId\": 12345,\r\n  \"bankAccNo\": \"1234567890\",\r\n  \"bankAccType\": \"Savings\",\r\n  \"bankIfsc\": \"HDFC0001234\",\r\n  \"bankHolder\": \"John Doe\",\r\n  \"paymentMode\": \"UPI\",\r\n  \"status\": \"Active\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/payment-methods?sanctionedLoanId=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"payment-methods"
+							],
+							"query": [
+								{
+									"key": "sanctionedLoanId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add payment method Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"accountId\": 12345,\r\n  \"bankAccNo\": \"1234567890\",\r\n  \"bankAccType\": \"Savings\",\r\n  \"bankIfsc\": \"HDFC0001234\",\r\n  \"bankHolder\": \"John Doe\",\r\n  \"paymntMode\": \"UPI\",\r\n  \"status\": \"Active\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/payment-methods/by-loan/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"payment-methods",
+								"by-loan",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create for all",
+			"item": [
+				{
+					"name": "create credit requirement",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"loanFormat\": \"Business Loan\",\r\n    \"requirementDescription\": \"Expansion of operations\",\r\n    \"endUseOfFund\": \"Purchase of equipment\",\r\n    \"dateOfFundRequirement\": \"2025-04-01\",\r\n    \"loanAmount\": 5000000,\r\n    \"loanDuration\": 60,\r\n    \"collateralType\": \"Property\",\r\n    \"purchaseDate\": \"2024-01-15\",\r\n    \"ownedBy\": \"John Doe\",\r\n    \"status\": \"Pending\",\r\n    \"sourceChannel\": \"Bank\",\r\n    \"purchaseValue\": 4000000,\r\n    \"marketValue\": 4500000,\r\n    \"description\": \"Loan for business expansion\",\r\n    \"address\": [\r\n        {\r\n            \"street\": \"123 Main St\",\r\n            \"city\": \"New York\",\r\n            \"state\": \"NY\",\r\n            \"zipCode\": \"10001\",\r\n            \"country\": \"USA\"\r\n        }\r\n    ],\r\n    \"creditContext\": {\r\n        \"contextType\": \"Business\",\r\n        \"contextDetails\": \"SME sector loan application\",\r\n        \"creditScore\": 132,\r\n        \"totalLoanAmount\": 252,\r\n        \"totalMonthlyEmi\": 423,\r\n        \"cancelledCheck\": \"path\",\r\n        \"bankAccountStatement\": \"pathstatement\"\r\n    },\r\n    \"bank\": [\r\n        {\r\n            \"accountNumber\": \"9817593248759835\",\r\n            \"bankName\": \"khkgnsd\",\r\n            \"ifscCode\": \"987sddv32\",\r\n            \"accountHolderName\": \"test holder\",\r\n            \"accountType\": \"IUjdkbcn\"\r\n        },\r\n        {\r\n            \"accountNumber\": \"98175222229835\",\r\n            \"bankName\": \"test bank name\",\r\n            \"ifscCode\": \"98111ddv32\",\r\n            \"accountHolderName\": \"test holder11\",\r\n            \"accountType\": \"IUjdkbcsa\"\r\n        }\r\n    ],\r\n    \"company\": [\r\n        {\r\n            \"name\": \"Tech Solutions Ltd11111\",\r\n            \"registrationType\": \"Private Limited11111\",\r\n            \"gstin\": \"22ABCDE1234F1A3\",\r\n            \"gsttype\": \"Regular\",\r\n            \"panNo\": \"ABCDE1234Z\",\r\n            \"industry\": \"Technology\",\r\n            \"sector\": \"IT Services\",\r\n            \"address\": \"789 Corporate Blvd\",\r\n            \"city\": \"San Francisco\",\r\n            \"state\": \"CA\",\r\n            \"zip\": \"94105\",\r\n            \"country\": \"USA\",\r\n            \"msmeRegistrationNumber\": \"MAME123451\",\r\n            \"incorporationDate\": \"2025-06-20\",\r\n            \"promoters\": [\r\n                {\r\n                    \"name\": \"Alice\",\r\n                    \"surname\": \"Johnson\",\r\n                    \"dob\": \"1980-05-20\",\r\n                    \"aadharNumber\": \"123456789010\",\r\n                    \"designation\": \"CEO\",\r\n                    \"shareholding\": 50,\r\n                    \"age\": 44,\r\n                    \"pan\": \"ABCDE1233F\",\r\n                    \"address\": \"456 Business St, NY\",\r\n                    \"yearsInAddress\": 5,\r\n                    \"din\": \"DIN0012345\",\r\n                    \"socialReferences\": [\r\n                        {\r\n                            \"socialNetworkName\": \"LinkedIn\",\r\n                            \"url\": \"https://www.linkedin.com/in/alicejohnson\"\r\n                        }\r\n                    ],\r\n                    \"executiveAssociations\": [\r\n                        {\r\n                            \"associationName\": \"Chamber of Commerce\",\r\n                            \"membershipNumber\": \"CHAM123466\",\r\n                            \"dateOfJoining\": \"2010-03-15\"\r\n                        }\r\n                    ]\r\n                },\r\n                {\r\n                    \"name\": \"Bob\",\r\n                    \"surname\": \"Smith\",\r\n                    \"dob\": \"1975-08-10\",\r\n                    \"aadharNumber\": \"987654321118\",\r\n                    \"designation\": \"CFO\",\r\n                    \"shareholding\": 30,\r\n                    \"age\": 49,\r\n                    \"pan\": \"FGHIJ5621K\",\r\n                    \"address\": \"789 Finance Ave, NY\",\r\n                    \"yearsInAddress\": 8,\r\n                    \"din\": \"DIN0098765\",\r\n                    \"socialReferences\": [\r\n                        {\r\n                            \"socialNetworkName\": \"Twitter\",\r\n                            \"url\": \"https://twitter.com/bobsmith\"\r\n                        }\r\n                    ],\r\n                    \"executiveAssociations\": [\r\n                        {\r\n                            \"associationName\": \"Finance Leaders Club\",\r\n                            \"membershipNumber\": \"FIN789012\",\r\n                            \"dateOfJoining\": \"2012-07-25\"\r\n                        }\r\n                    ]\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/credit-requirements/apply",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"credit-requirements",
+								"apply"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create credit application",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"companyProfile\": {\r\n        \"gstin\": \"29ABCDE1234F1A5\",\r\n        \"panNo\": \"ABCDE1211F\",\r\n        \"msmeRegistrationNumber\": \"MSME123456\",\r\n        \"gsttype\": \"Regular\",\r\n        \"incorporationDate\": \"2015-06-15\",\r\n        \"sector\": \"Corporate\",\r\n        \"industry\": \"Fintech\",\r\n        \"applicantType\": \"Private Limited\",\r\n        \"name\": \"TestComp1\",\r\n        \"registrationType\": \"testtype\",\r\n        \"address\": \"adfd aeebxvdfqe34d 34gd 24\",\r\n        \"city\": \"raj\",\r\n        \"state\": \"guj\",\r\n        \"zip\": \"235124\",\r\n        \"country\": \"india\"\r\n    },\r\n    // \"addresses\": [\r\n    //     {\r\n    //         \"address\": \"123, Main Street\",\r\n    //         \"city\": \"Beverly Hills\",\r\n    //         \"state\": \"California\",\r\n    //         \"zip\": \"90210\",\r\n    //         \"country\": \"USA\"\r\n    //     },\r\n    //     {\r\n    //         \"address\": \"456, Second Street\",\r\n    //         \"city\": \"Los Angeles\",\r\n    //         \"state\": \"California\",\r\n    //         \"zip\": \"90001\",\r\n    //         \"country\": \"USA\"\r\n    //     }\r\n    // ],\r\n    \"loanDetails\": {\r\n        \"endUseOfFund\": \"Business Expansion\",\r\n        \"dateOfFundRequirement\": \"2025-03-13\",\r\n        \"loanAmount\": 5000000,\r\n        \"loanDuration\": 36,\r\n        \"collateralType\": \"Equities & Mutual Funds\",\r\n        \"purchaseDate\": \"2020-01-01\",\r\n        \"ownedBy\": \"Self\",\r\n        \"purchaseValue\": 3000000,\r\n        \"marketValue\": 3500000,\r\n        \"description\": \"Loan for expanding the existing business\"\r\n    },\r\n    \"applicantDetails\": {\r\n        \"pan\": \"ABCDE1234F\",\r\n        \"fullName\": \"John Doe\",\r\n        \"emailId\": \"johndoe@gmail.com\",\r\n        \"phone\": \"1234567890\",\r\n        \"employmentType\": \"Self-Employed\",\r\n        \"incomePerAnnum\": 1200000,\r\n        \"state\": \"California\",\r\n        \"panDocument\": \"PanCardDocument.pdf\"\r\n    },\r\n    \"financialAssessment\": {\r\n        \"financialYear\": \"2024-2025\",\r\n        \"month\": \"January\",\r\n        \"reportedSales\": 1000000,\r\n        \"reportedPurchases\": 800000,\r\n        \"taxesPaid\": 150000,\r\n        \"source\": \"Business Records\"\r\n    },\r\n    \"accountAssessment\": {\r\n        \"financialYear\": \"2024-2025\",\r\n        \"reportedRevenue\": 5000000,\r\n        \"grossIncome\": 4500000,\r\n        \"netIncome\": 4000000,\r\n        \"taxableIncome\": 3500000,\r\n        \"taxablePaid\": 300000,\r\n        \"source\": \"Bank Statements\"\r\n    },\r\n    \"assetLiabilities\": {\r\n        \"promoterName\": \"John Doe\",\r\n        \"statutoryId\": \"AB1234567\",\r\n        \"taxId\": \"TX123456\",\r\n        \"dob\": \"1980-05-20\",\r\n        \"mobile\": \"1234567890\",\r\n        \"designation\": \"CEO\",\r\n        \"doj\": \"2015-06-15\",\r\n        \"source\": \"Company Records\"\r\n    },\r\n    \"collateralSecurity\": {\r\n        \"bankName\": \"HDFC Bank\",\r\n        \"accountHolder\": \"John Doe\",\r\n        \"account\": \"123456789012\",\r\n        \"ifsc\": \"HDFC0001234\",\r\n        \"accountType\": \"Current\",\r\n        \"currency\": \"INR\",\r\n        \"openingDate\": \"2010-12-07\",\r\n        \"source\": \"Bank Passbook\"\r\n    },\r\n    \"status\": \"PENDING\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/credit-applications/apply",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"credit-applications",
+								"apply"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

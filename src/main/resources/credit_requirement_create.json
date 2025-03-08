@@ -1,0 +1,74 @@
+{
+  "loanFormat": "Term Loan",
+  "requirementDescription": "Expansion of business operations",
+  "endUseOfFund": "Working capital",
+  "dateOfFundRequirement": "2025-06-15",
+  "loanAmount": 5000000,
+  "loanDuration": 60,
+  "collateralType": "Property",
+  "purchaseDate": "2023-12-01",
+  "ownedBy": "Company XYZ",
+  "sourceChannel": "Bank",
+  "status": "Pending",
+  "purchaseValue": 4500000,
+  "marketValue": 6000000,
+  "description": "Loan required for expanding manufacturing capacity.",
+  "company": [
+    {
+      "name": "Company XYZ",
+      "gstin": "27AAACC1234A1Z5",
+      "registrationType": "Private Limited",
+      "panNo": "AAACC1234A",
+      "industry": "Manufacturing",
+      "sector": "Automobile",
+      "msmeRegistrationNumber": "UAN123456789",
+      "incorporationDate": "2015-08-25",
+      "address": "123 Industrial Estate",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "zip": "400001",
+      "country": "India",
+      "promoters": [
+        {
+          "name": "John",
+          "surname": "Doe",
+          "dob": "1980-07-15",
+          "aadharNumber": "123456789012",
+          "designation": "Director",
+          "shareholding": 50,
+          "age": 44,
+          "pan": "ABCDE1234F",
+          "address": "Flat 101, XYZ Apartments, Mumbai",
+          "yearsInAddress": 5,
+          "din": "12345678",
+          "socialReferences": [
+            {
+              "url": "https://www.linkedin.com/in/johndoe",
+              "socialNetworkName": "LinkedIn"
+            }
+          ],
+          "executiveAssociations": [
+            {
+              "associationName": "Automobile Association",
+              "membershipNumber": "A12345",
+              "dateOfJoining": "2012-03-10"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "creditContext": {
+    "creditScore": 750,
+    "totalLoanAmount": 15000000,
+    "totalMonthlyEmi": 250000,
+    "bank": [
+      {
+        "bankName": "State Bank of India",
+        "accountNumber": "123456789012",
+        "accountType": "Current",
+        "ifscCode": "SBIN0001234"
+      }
+    ]
+  }
+}
