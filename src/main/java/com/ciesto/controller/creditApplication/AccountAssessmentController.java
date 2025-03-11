@@ -51,12 +51,23 @@ public class AccountAssessmentController {
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<Page<AccountAssessment>>> getAll(Pageable pageable) {
+    public ResponseEntity<ApiResponse<Page<AccountAssessment>>> getAll(
+            @RequestParam(required = false) String financialYear,
+            @RequestParam(required = false) Integer reportedRevenue,
+            @RequestParam(required = false) Integer grossIncome,
+            @RequestParam(required = false) Integer netIncome,
+            @RequestParam(required = false) Integer taxableIncome,
+            @RequestParam(required = false) Integer taxablePaid,
+            @RequestParam(required = false) String source,
+            Pageable pageable) {
         try {
-            Page<AccountAssessment> page = service.getAll(pageable);
+            Page<AccountAssessment> page = service.getAll(
+                    financialYear, reportedRevenue, grossIncome, netIncome,
+                    taxableIncome, taxablePaid, source, pageable);
             return ResponseEntity.ok(ApiResponse.success(page));
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(ApiResponse.error("Error fetching account assessments: " + e.getMessage()));
         }
     }
+
 }

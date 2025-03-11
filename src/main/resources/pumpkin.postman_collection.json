@@ -49,22 +49,58 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/credit-applications?companyName=Test2Companyname",
+							"raw": "http://localhost:8080/api/credit-applications?companyName=Test1Company name",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
+								"api",
 								"credit-applications"
 							],
 							"query": [
 								{
 									"key": "companyName",
-									"value": "Test2Companyname"
+									"value": "Test1Company name"
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
 								}
 							]
-						}
+						},
+						"description": "```\ncompanyName\npurpose\nidentifiedOn\nsourceChannelstatus\n\n ```\n\nDo note pass params to get list"
+					},
+					"response": []
+				},
+				{
+					"name": "credit application by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/credit-applications/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"credit-applications",
+								"4"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "```\ncompanyName\npurpose\nidentifiedOn\nsourceChannelstatus\n\n ```\n\nDo note pass params to get list"
 					},
 					"response": []
 				},
@@ -233,7 +269,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/account-assessment?financialYear=2023-2024",
+							"raw": "http://localhost:8080/api/account-assessment?financialYear=2023-2024&grossIncome=1200000&source=Internal Report&reportedRevenue=5000000&netIncome=800000&taxableIncome=600000&taxablePaid=150",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -247,6 +283,30 @@
 								{
 									"key": "financialYear",
 									"value": "2023-2024"
+								},
+								{
+									"key": "grossIncome",
+									"value": "1200000"
+								},
+								{
+									"key": "source",
+									"value": "Internal Report"
+								},
+								{
+									"key": "reportedRevenue",
+									"value": "5000000"
+								},
+								{
+									"key": "netIncome",
+									"value": "800000"
+								},
+								{
+									"key": "taxableIncome",
+									"value": "600000"
+								},
+								{
+									"key": "taxablePaid",
+									"value": "150"
 								}
 							]
 						}
@@ -294,7 +354,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/financial-assessments?financialYear=2023-2024&month=January",
+							"raw": "http://localhost:8080/api/financial-assessments?financialYear=2023&month=January&reportedSales=10000&source=Bank&taxesPaid=1500",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -307,11 +367,157 @@
 							"query": [
 								{
 									"key": "financialYear",
-									"value": "2023-2024"
+									"value": "2023"
 								},
 								{
 									"key": "month",
 									"value": "January"
+								},
+								{
+									"key": "reportedSales",
+									"value": "10000"
+								},
+								{
+									"key": "source",
+									"value": "Bank"
+								},
+								{
+									"key": "taxesPaid",
+									"value": "1500"
+								}
+							]
+						},
+						"description": "```\nfinancialYear,\nmonth, \nreportedSales,\nreportedPurchases,\nsource,\ntaxesPaid\n\n ```\n\nList:- Do not pass filter params"
+					},
+					"response": []
+				},
+				{
+					"name": "applicant by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/applicants/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"applicants",
+								"4"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "```\ncompanyName\npurpose\nidentifiedOn\nsourceChannelstatus\n\n ```\n\nDo note pass params to get list"
+					},
+					"response": []
+				},
+				{
+					"name": "applicant filter and list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/applicants?pan=ABCDE1234F&phone=1234567890&employmentType=Self-Employed&state=California",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"applicants"
+							],
+							"query": [
+								{
+									"key": "pan",
+									"value": "ABCDE1234F"
+								},
+								{
+									"key": "phone",
+									"value": "1234567890"
+								},
+								{
+									"key": "employmentType",
+									"value": "Self-Employed"
+								},
+								{
+									"key": "state",
+									"value": "California"
+								}
+							]
+						},
+						"description": "```\npan,\nphone,\nemploymentType,\nstate\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "applicant by application id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/applicants/application/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"applicants",
+								"application",
+								"5"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Pass :- credit application id"
+					},
+					"response": []
+				},
+				{
+					"name": "add applicant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pan\": \"ABCDE1234B\",\r\n    \"fullName\": \"Test applicant11\",\r\n    \"email\": \"testemailappp1@gmail11.test\",\r\n    \"phone\": \"4578129632\",\r\n    \"employmentType\": \"Self-Employed\",\r\n    \"incomePerAnnum\": \"5000\",\r\n    \"state\": \"gujrat\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/applicants?creditApplicationId=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"applicants"
+							],
+							"query": [
+								{
+									"key": "creditApplicationId",
+									"value": "4"
 								}
 							]
 						}

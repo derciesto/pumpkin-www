@@ -36,6 +36,10 @@ public class ApplicantDetailsService {
                 .orElseThrow(() -> new ResourceNotFoundException("Applicant not found", 404L));
     }
 
+    public List<ApplicantDetails> getApplicantByApplicationId(Long id) {
+        return repository.findByCreditApplicationId(id);
+    }
+
     public List<ApplicantDetails> getApplicantsWithFilters(String pan, String phone, String employmentType, String state) {
         List<ApplicantDetails> applicants = repository.findAll();
 

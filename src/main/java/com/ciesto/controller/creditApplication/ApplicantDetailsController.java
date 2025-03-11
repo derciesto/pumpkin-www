@@ -39,6 +39,16 @@ public class ApplicantDetailsController {
         }
     }
 
+    @GetMapping("/application/{id}")
+    public ResponseEntity<ApiResponse<List<ApplicantDetails>>> getApplicantByApplicationId(@PathVariable Long id) {
+        try {
+            List<ApplicantDetails> applicant = service.getApplicantByApplicationId(id);
+            return ResponseEntity.ok(ApiResponse.success(applicant));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(ApiResponse.error("Error fetching applicant: " + e.getMessage()));
+        }
+    }
+
     @GetMapping
     public ResponseEntity<ApiResponse<List<ApplicantDetails>>> getAllApplicants(
             @RequestParam(required = false) String pan,

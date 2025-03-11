@@ -55,7 +55,7 @@ public class CreditApplicationController {
             @RequestParam(required = false) String status
     ) {
         try {
-            List<CreditApplication> applications = service.getAllFiltered(companyName, purpose, identifiedOn, sourceChannel, status);
+            List<CreditApplication> applications = service.getAllFiltered(companyName.replace(" ",""), purpose, identifiedOn, sourceChannel, status);
             return ResponseEntity.ok(ApiResponse.success(applications));
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(ApiResponse.error("Error fetching credit applications: " + e.getMessage()));

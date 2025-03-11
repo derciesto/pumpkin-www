@@ -183,6 +183,7 @@ public class CreateCreditRequirementService {
             ba.setAccountNumber(bank.getAccountNumber());
             ba.setAccountType(bank.getAccountType());
             ba.setIfscCode(bank.getIfscCode());
+            ba.setAccountHolderName(bank.getAccountHolderName());
             bankAccounts.add(ba);
         });
 
