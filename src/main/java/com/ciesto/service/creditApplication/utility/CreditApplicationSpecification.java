@@ -10,7 +10,7 @@ public class CreditApplicationSpecification {
             Specification<CreditApplication> spec = Specification.where(null);
 
             if (companyName != null) {
-                spec = spec.and((root1, query1, cb1) -> cb1.equal(root1.get("company").get("name"), companyName));
+                spec = spec.and((root1, query1, cb1) -> cb1.equal(root1.get("company").get("name"), companyName.replace(" ","")));
             }
             if (purpose != null) {
                 spec = spec.and((root1, query1, cb1) -> cb1.like(root1.get("purpose"), "%" + purpose + "%"));

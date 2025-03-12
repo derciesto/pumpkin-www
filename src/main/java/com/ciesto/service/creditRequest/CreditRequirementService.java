@@ -116,7 +116,7 @@ public class CreditRequirementService {
         List<Predicate> predicates = new ArrayList<>();
 
         if (companyName != null && !companyName.isEmpty()) {
-            predicates.add(cb.like(cb.lower(companyJoin.get(NAME)), PERCENT_SYMBOL + companyName.toLowerCase() + PERCENT_SYMBOL));
+            predicates.add(cb.like(cb.lower(companyJoin.get(NAME)), PERCENT_SYMBOL + companyName.replace(" ","").toLowerCase() + PERCENT_SYMBOL));
         }
         if (purpose != null && !purpose.isEmpty()) {
             predicates.add(cb.like(cb.lower(creditRoot.get(REQUIREMENT_DESCRIPTION)), PERCENT_SYMBOL + purpose.toLowerCase() + PERCENT_SYMBOL));

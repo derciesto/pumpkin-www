@@ -381,7 +381,26 @@ CREATE TABLE public.bank_account (
 
 
 
+-- DROP TABLE public.applicant_details;
 
+CREATE TABLE if not exists public.applicant_details (
+	id bigserial NOT NULL,
+	credit_application_id int8 NOT NULL,
+	pan varchar(10) NOT NULL,
+	email varchar(128) NULL,
+	phone varchar(16) NULL,
+	employment_type varchar(16) NULL,
+	income_per_annum int4 NULL,
+	state varchar(16) NULL,
+	insert_timestamp timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+	identification_proof_type varchar(128) NULL,
+	identification_number varchar(128) NULL,
+	proof_of_residence varchar(128) NULL,
+	proof_of_qualification varchar(128) NULL,
+	address varchar(2048) NULL,
+	CONSTRAINT applicant_details_pan_key UNIQUE (pan),
+	CONSTRAINT applicant_details_pkey PRIMARY KEY (id)
+);
 
 
 

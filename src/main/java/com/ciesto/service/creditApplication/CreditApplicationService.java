@@ -6,8 +6,10 @@ import com.ciesto.common.customException.ImproperDataException;
 import com.ciesto.common.customException.ResourceNotFoundException;
 import com.ciesto.model.creditRequirement.CompanyProfile;
 import com.ciesto.model.creditApplication.CreditApplication;
+import com.ciesto.model.creditRequirement.CreditRequirement;
 import com.ciesto.repository.creditRequirement.CompanyProfileRepository;
 import com.ciesto.repository.creditApplication.CreditApplicationRepository;
+import com.ciesto.repository.creditRequirement.CreditRequirementRepository;
 import com.ciesto.service.creditApplication.utility.CreditApplicationSpecification;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.jpa.domain.Specification;
@@ -24,9 +26,12 @@ public class CreditApplicationService {
 
     private final CompanyProfileRepository companyProfileRepository;
 
-    public CreditApplicationService(CreditApplicationRepository repository,CompanyProfileRepository companyProfileRepository) {
+    private final CreditRequirementRepository creditRequirementRepository;
+
+    public CreditApplicationService(CreditApplicationRepository repository, CompanyProfileRepository companyProfileRepository, CreditRequirementRepository creditRequirementRepository) {
         this.repository = repository;
         this.companyProfileRepository = companyProfileRepository;
+        this.creditRequirementRepository = creditRequirementRepository;
     }
 
     public CreditApplication createCreditApplication(Long companyId, CreditApplication creditApplication) {
@@ -45,7 +50,15 @@ public class CreditApplicationService {
 
     public List<CreditApplication> getAllFiltered(String companyName, String purpose, String identifiedOn, String sourceChannel, String status) {
         Specification<CreditApplication> spec = CreditApplicationSpecification.withFilters(companyName, purpose, identifiedOn, sourceChannel, status);
-        return repository.findAll(spec);
+        List<CreditApplication> all = repository.findAll(spec);
+        for (CreditApplication creditApplication : all) {
+            List<CreditRequirement> byCompanyId = creditRequirementRepository.findByCompanyId(creditApplication.getCompany().getId());
+            if(!byCompanyId.isEmpty()) {
+                creditApplication.setRequirement(byCompanyId);
+            }
+        }
+
+        return all;
     }
 
     public CreditApplication getById(Long id) {

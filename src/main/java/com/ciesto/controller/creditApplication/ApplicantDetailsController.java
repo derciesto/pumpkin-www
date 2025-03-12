@@ -54,9 +54,13 @@ public class ApplicantDetailsController {
             @RequestParam(required = false) String pan,
             @RequestParam(required = false) String phone,
             @RequestParam(required = false) String employmentType,
-            @RequestParam(required = false) String state) {
+            @RequestParam(required = false) String city,
+            @RequestParam(required = false) String identifyProofType,
+            @RequestParam(required = false) String state,
+            @RequestParam(required = false) String pin
+            ) {
         try {
-            List<ApplicantDetails> applicants = service.getApplicantsWithFilters(pan, phone, employmentType, state);
+            List<ApplicantDetails> applicants = service.getApplicantsWithFilters(pan, phone, employmentType, state,city,identifyProofType,pin);
             return ResponseEntity.ok(ApiResponse.success(applicants));
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(ApiResponse.error("Error fetching applicants: " + e.getMessage()));

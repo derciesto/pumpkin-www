@@ -40,18 +40,21 @@ public class ApplicantDetailsService {
         return repository.findByCreditApplicationId(id);
     }
 
-    public List<ApplicantDetails> getApplicantsWithFilters(String pan, String phone, String employmentType, String state) {
+    public List<ApplicantDetails> getApplicantsWithFilters(String pan, String phone, String employmentType, String state, String city, String identifyProofType, String pin) {
         List<ApplicantDetails> applicants = repository.findAll();
 
         return applicants.stream()
-                .filter(createApplicantPredicate(pan, phone, employmentType, state))
+                .filter(createApplicantPredicate(pan, phone, employmentType, state, city, identifyProofType, pin))
                 .collect(Collectors.toList());
     }
 
-    private Predicate<ApplicantDetails> createApplicantPredicate(String pan, String phone, String employmentType, String state) {
+    private Predicate<ApplicantDetails> createApplicantPredicate(String pan, String phone, String employmentType, String state, String city, String identifyProofType, String pin) {
         return applicant -> (StringUtils.isEmpty(pan) || applicant.getPan().equalsIgnoreCase(pan))
                 && (StringUtils.isEmpty(phone) || applicant.getPhone().equalsIgnoreCase(phone))
                 && (StringUtils.isEmpty(employmentType) || applicant.getEmploymentType().equalsIgnoreCase(employmentType))
+                && (StringUtils.isEmpty(city) || applicant.getCity().equalsIgnoreCase(city))
+                && (StringUtils.isEmpty(identifyProofType) || applicant.getIdentifyProofType().equalsIgnoreCase(identifyProofType))
+                && (StringUtils.isEmpty(pin) || applicant.getPin().equalsIgnoreCase(pin))
                 && (StringUtils.isEmpty(state) || applicant.getState().equalsIgnoreCase(state));
     }
 
@@ -59,13 +62,12 @@ public class ApplicantDetailsService {
     public ApplicantDetails updateApplicant(Long id, ApplicantDetails updatedApplicant) {
         ApplicantDetails existingApplicant = getApplicantById(id);
 
-        existingApplicant.setFullName(updatedApplicant.getFullName());
         existingApplicant.setEmail(updatedApplicant.getEmail());
         existingApplicant.setPhone(updatedApplicant.getPhone());
         existingApplicant.setEmploymentType(updatedApplicant.getEmploymentType());
         existingApplicant.setIncomePerAnnum(updatedApplicant.getIncomePerAnnum());
         existingApplicant.setState(updatedApplicant.getState());
-        existingApplicant.setPanDocument(updatedApplicant.getPanDocument());
+//        existingApplicant.setPanDocument(updatedApplicant.getPanDocument());
 
         return repository.save(existingApplicant);
     }

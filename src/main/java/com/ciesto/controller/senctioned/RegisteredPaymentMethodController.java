@@ -37,4 +37,13 @@ public class RegisteredPaymentMethodController {
             return ResponseEntity.internalServerError().body(ApiResponse.error("Error fetching payment methods: " + e.getMessage()));
         }
     }
+//    @GetMapping("/{id}")
+//    public ResponseEntity<ApiResponse<RegisteredPaymentMethod>> getById(@PathVariable Long id) {
+//        try {
+//            RegisteredPaymentMethod paymentMethod = service.getById(id);
+//            return ResponseEntity.ok(ApiResponse.success(paymentMethod));
+//        } catch (Exception e) {
+//            return ResponseEntity.internalServerError().body(ApiResponse.error("Error fetching payment method: " + e.getMessage()));
+//        }
+//    }
 }
